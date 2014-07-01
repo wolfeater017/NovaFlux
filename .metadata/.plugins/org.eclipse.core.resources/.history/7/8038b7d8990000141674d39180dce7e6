@@ -1,0 +1,37 @@
+package tools;
+
+import java.awt.Graphics;
+
+public class AI extends Thing{
+
+	public AI(int Startx, int Starty,int Endx, int Endy) {
+		super(Startx, Starty);
+	
+	}
+
+	@Override
+	public void Step() {
+		x+=dx;
+		y+=dy;
+		
+	}
+
+	@Override
+	public void solidCollisions() {
+		
+		
+	}
+
+	@Override
+	public void render(Graphics g) {
+		
+		
+	}
+
+	@Override
+	public void destroy() {
+		
+		
+	}
+
+}

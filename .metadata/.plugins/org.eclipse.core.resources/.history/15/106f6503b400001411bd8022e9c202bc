@@ -1,0 +1,15 @@
+package ai;
+
+import Graphic.Sprite;
+import tools.AI;
+
+public class IceCube extends AI{
+	
+	protected Sprite sprite;
+
+	public IceCube(int Startx, int Starty, int Direction) {
+		super(Startx, Starty, Direction);
+		sprite = new Sprite(gp, xscale, yscale, orientation, img)
+	}
+
+}

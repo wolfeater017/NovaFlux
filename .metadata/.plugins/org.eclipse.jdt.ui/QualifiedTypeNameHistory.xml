@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="Ref.Ref"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.awt.Rectangle"/>
+<fullyQualifiedTypeName name="java.awt.Point"/>
+<fullyQualifiedTypeName name="Graphic.Sprite"/>
+<fullyQualifiedTypeName name="tools.LM"/>
+<fullyQualifiedTypeName name="tools.Mask"/>
+<fullyQualifiedTypeName name="ai.IceCube"/>
+<fullyQualifiedTypeName name="tools.AI"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+</qualifiedTypeNameHistroy>

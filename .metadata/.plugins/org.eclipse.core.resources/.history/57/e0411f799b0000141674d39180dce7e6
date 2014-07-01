@@ -1,0 +1,53 @@
+package tools;
+
+import java.awt.Graphics;
+
+import runtime.GamePanel;
+
+public class AI extends Thing{
+	
+	protected boolean followPath;
+	protected Path path;
+	protected Character[] character;
+
+	public AI(Path path) {
+		super(path.getPoint().x, path.getPoint().y);
+		
+		followPath = true;
+		this.path = path;
+		this.x = path.getPoint().x;
+		this.y = path.getPoint().y;
+	}
+	
+	@Override
+	public void addPanelRef(GamePanel gp) {
+		super.addPanelRef(gp);
+		character = Character.findCharacters(gp);
+	}
+
+	@Override
+	public void Step() {
+		x+=dx;
+		y+=dy;
+		
+	}
+
+	@Override
+	public void solidCollisions() {
+		
+		
+	}
+
+	@Override
+	public void render(Graphics g) {
+		
+		
+	}
+
+	@Override
+	public void destroy() {
+		
+		
+	}
+
+}
