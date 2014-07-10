@@ -12,17 +12,25 @@ public class Camera2D {
 	
 	public static final int Tweening = 0, NormalScroll = 1, SideScroll = 2, TweeningSideScroll = 3;
 	
-	private double x,y;
+	private float x,y;
 	private Character player;
 	private int ScrollType;
 
 	private int xOffset = 0,yOffset = 0;
 
-	public  Camera2D(GamePanel gp,Character player,double x, double y,int ScrollType){
+	public  Camera2D(GamePanel gp,Character player,float x, float y,int ScrollType){
 		this.x = x;
 		this.y = y; 
 
 		this.player = player; 
+		this.ScrollType = ScrollType;
+	}
+	
+	public  Camera2D(float x, float y,int ScrollType){
+		this.x = x;
+		this.y = y; 
+
+		 
 		this.ScrollType = ScrollType;
 	}
 	
@@ -69,8 +77,10 @@ public class Camera2D {
 	}
 	
 	private void Normal2DScroll(){
-		this.x = -player.x + Driver.WIDTH /2 + xOffset;
-		this.y = -player.y + Driver.HEIGHT /2 + yOffset;
+		if(player!=null){
+			this.x = -player.x + Driver.WIDTH /2 + xOffset;
+			this.y = -player.y + Driver.HEIGHT /2 + yOffset;
+		}
 	}
 	
 	private void sideScroll(){
@@ -79,6 +89,11 @@ public class Camera2D {
 	
 	public double getX(){ return x; }
 	public double getY(){ return y; }
+	
+	public void setCoord(double d, double e){
+		this.x = (float) d;
+		this.y = (float) e;
+	}
 	
 	
 	

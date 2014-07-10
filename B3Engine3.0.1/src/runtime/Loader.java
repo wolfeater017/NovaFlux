@@ -1,8 +1,14 @@
 package runtime;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.SwingWorker;
@@ -75,19 +81,53 @@ public abstract class Loader extends SwingWorker<Object, Object>{
 	 * @param name
 	 * @return
 	 */
-	public static BufferedImage resImage(String name){
-		String path = "/Res/Images/";
+	public static BufferedImage Image(String path){
+		
 		try{
-			return ImageIO.read( Loader.class.getResourceAsStream(path + name) );
+			BufferedImage Bi =  ImageIO.read( Loader.class.getResourceAsStream(path) );
+			if(Bi==null)
+				System.out.println("Invalid Image path: "  + path );
+			return Bi;
 		}catch(IOException e ){
 			e.printStackTrace();
-			System.out.println("Invalid Image path: " + path + name );
+			System.out.println("Invalid Image path: "  + path );
 		}
 		return null;
 	}
 	
-	public static URL resAudio(String name){
-		return Loader.class.getResource("/Res/Audio/" + name);
+	public static URL Audio(String path){
+		URL u = Loader.class.getResource( path);
+		if(u==null)
+			System.out.println("Invalid Audio path: " + path.toString() );
+		return u;
+	}
+	
+	public static Scanner getFileScanner(String path){
+		return new Scanner(Loader.class.getResourceAsStream(path) );
+		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

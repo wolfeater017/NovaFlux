@@ -3,20 +3,25 @@ package tools;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
+
+
 public class Button {
 	
-	private Rectangle rect;
+	public Rectangle rect;
 	private boolean MouseInRegion = false;
 	protected boolean Enabled;
 	private boolean Selected =false;
-	private String text;
-	private int xOffset;
+	protected String text;
+	protected int xOffset;
 	protected int yOffset =0;
 	
-	private Font font = new Font("Arial", Font.BOLD, 18);
+	protected Color hovering = Color.ORANGE,normal = Color.WHITE,disabled = Color.GRAY;
+	
+	protected Font font = new Font("Arial", Font.BOLD, 18);
 
 	public Button(String text,Rectangle rect,int xOffset){
 		
@@ -37,7 +42,7 @@ public class Button {
 	 * @param e
 	 */
 	public void MouseMoved(MouseEvent e){
-		Rectangle mouse = new Rectangle(e.getX()+3 ,e.getY()+3,4,4);
+		Rectangle mouse = new Rectangle(e.getX(), e.getY()-10, 1, 1);
 		if( Enabled && rect.intersects(mouse) )
 			MouseInRegion = true;
 		else
@@ -50,8 +55,8 @@ public class Button {
 	 * @param e
 	 */
 	public void MouseClicked(MouseEvent e){
-		Rectangle mouse = new Rectangle(e.getX()+3 ,e.getY()+3,6,6);
-		if( Enabled && rect.intersects(mouse )){
+		Rectangle mouse = new Rectangle(e.getX(), e.getY()-10, 1, 1);
+		if( Enabled && rect.intersects(mouse) ){
 			Selected = true;
 			Clicked();
 		}
@@ -74,17 +79,17 @@ public class Button {
 	public void render(Graphics g){
 		g.setFont(font);
 		if(!Enabled){
-			g.setColor(Color.GRAY);
+			g.setColor(disabled);
 			g.drawRect(rect.x, rect.y, rect.width, rect.height);
 			g.drawString(text,rect.x + xOffset,rect.y + 20 + yOffset);
 		}
 		else if(!MouseInRegion){
-			g.setColor(Color.WHITE);
+			g.setColor(normal);
 			g.drawRect(rect.x, rect.y, rect.width, rect.height);
 			g.drawString(text,rect.x + xOffset,rect.y + 20 + yOffset);
 		}
 		else if(MouseInRegion && Enabled){
-			g.setColor(Color.ORANGE);
+			g.setColor(hovering);
 			g.fillRect(rect.x, rect.y, rect.width, rect.height);
 			g.setColor(Color.WHITE);
 			g.drawString(text,rect.x + xOffset,rect.y + 20 + yOffset);

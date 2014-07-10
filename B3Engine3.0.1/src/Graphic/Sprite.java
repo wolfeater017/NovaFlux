@@ -20,7 +20,7 @@ public class Sprite {
 	 */
 	public BufferedImage[] images;
 	public int orientation =1;
-	public GamePanel gp;
+	
 	public double xscale,yscale;
 	public boolean freeze = false;
 	public int freezeFrame = 0;
@@ -31,8 +31,8 @@ public class Sprite {
 	
 	public int frame;
 	
-	public Sprite(GamePanel gp, double xscale, double yscale, int orientation,BufferedImage...img){
-		this.gp = gp;
+	public Sprite( double xscale, double yscale, int orientation,BufferedImage...img){
+		
 		images = new BufferedImage[img.length];
 		for (int bbb = 0; bbb < images.length; bbb++)
 			images[bbb] = img[bbb];

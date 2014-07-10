@@ -12,9 +12,9 @@ public class Block extends Thing {
 	protected Mask mask;
 	protected boolean Visible;
 	protected Sprite sprite;
-	protected int index;
+	
 
-	public Block(int x, int y,boolean Visible,int index, GamePanel gp) {
+	public Block(int x, int y,boolean Visible, GamePanel gp) {
 		super(x, y, gp);
 		
 		this.Visible = Visible;
@@ -33,40 +33,50 @@ public class Block extends Thing {
 	public void Step() {
 		
 		for(int bbb = 0; bbb<gp.stuff.size(); bbb++){
+			
 			Thing thing = gp.stuff.get(bbb);
 			if( thing instanceof Character)
-				if( this.mask.collidesWith(thing.mask) )
+				if( thing.mask!=null && this.mask.collidesWith(thing.mask) )
 					Collision(thing);
-				
+			if(thing instanceof AI){
+				if(this.mask.collidesWith( ((AI) thing).getMask() ) ){
+					
+					((AI)thing).blockCollision(Collision(thing));
+				}
+			}
 		}
 				
 		
 
 	}
 	
-	public void Collision(Thing thing){
+	public int Collision(Thing thing){
 		
 		boolean[] side = this.mask.collisionSide(thing.mask);
 		if(side[Mask.left] ){
 			thing.dx = 0;
 			thing.setCoord(this.mask.getRect().x + this.mask.getRect().width, thing.y);
+			return Mask.left;
 		}
 		else if(side[Mask.top]){
 			thing.dy = 0;
 			thing.setCoord(thing.x, this.y + this.mask.getRect().height );
+			return Mask.top;
 		}
 		else if(side[Mask.right]){
 			thing.dx = 0;
 			thing.setCoord(this.x - thing.mask.getRect().width, thing.y);
+			return Mask.right;
 		}
 		else if(side[Mask.bottom]){
 			thing.dy = 0;
 			thing.setCoord(thing.x, this.y - thing.mask.getRect().height);
+			return Mask.bottom;
 		}
+		return -1;
 	}
 
-	@Override
-	public void solidCollisions() {}
+
 
 	@Override
 	public void render(Graphics g) {
@@ -83,7 +93,7 @@ public class Block extends Thing {
 
 	@Override
 	public void destroy() {
-		gp.solids.remove(index);
+		gp.stuff.remove(this);
 
 	}
 

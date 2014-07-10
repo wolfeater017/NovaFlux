@@ -47,7 +47,6 @@ public abstract class Thing {
 	 */
 	public void setCoord(int x,int y){ this.x = x; this.y = y;}
 	
-	public abstract void solidCollisions();
 	public abstract void render(Graphics g);
 	public abstract void destroy();
 

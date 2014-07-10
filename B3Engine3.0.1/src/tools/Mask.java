@@ -19,6 +19,19 @@ public class Mask {
 		this.width = width;
 		this.height = height;
 	}
+	
+	public Mask(int Xoffset,int Yoffset,double width,double height){
+		
+		
+		this.Xoffset = Xoffset;
+		this.Yoffset = Yoffset;
+		this.width = width;
+		this.height = height;
+	}
+	
+	public void setThing(Thing thing){
+		thisThing = thing;
+	}
 	/**
 	 * 
 	 * @return-Rectangle- representing collision Mask
@@ -42,7 +55,7 @@ public class Mask {
 	 * false- if this mask is not touching m
 	 */
 	public boolean collidesWith(Mask m){
-		if(this.getRect().intersects( m.getRect() ) )
+		if(m!=null && this.getRect().intersects( m.getRect() ) )
 			return true;
 		return false;
 	}

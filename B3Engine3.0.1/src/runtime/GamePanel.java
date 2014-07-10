@@ -24,7 +24,6 @@ public class GamePanel extends JPanel implements Runnable{
 	 */
 	private static final long serialVersionUID = -2380805794631269689L;
 	public ArrayList<Thing> stuff = new ArrayList<Thing>();
-	public ArrayList<Thing> solids = new ArrayList<Thing>();
 	public ArrayList<Integer> Alarms = new ArrayList<Integer>();
 	public ArrayList<Boolean> AlarmStatus = new ArrayList<Boolean>();
 	
@@ -62,10 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
 		for (int bbb = 0; bbb < stuff.size(); bbb++)
 			((Thing) stuff.get(bbb)).Step();
 
-		for (int bbb = 0; bbb < solids.size(); bbb++) {
-
-			((Thing) solids.get(bbb)).Step();
-		}
+		
 		for (int bbb = 0; bbb < AlarmStatus.size(); bbb++) {
 
 			if (AlarmStatus.get(bbb)) {
@@ -93,8 +89,6 @@ public class GamePanel extends JPanel implements Runnable{
 		for (int bbb = 0; bbb < stuff.size(); bbb++)
 			((Thing) stuff.get(bbb)).render(g);
 
-		for (int bbb = 0; bbb < solids.size(); bbb++)
-			((Thing) solids.get(bbb)).render(g);
 		
 		
 	}

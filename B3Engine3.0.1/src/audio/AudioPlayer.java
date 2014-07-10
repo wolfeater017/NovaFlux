@@ -8,6 +8,7 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
+
 import runtime.Loader;
 
 public class AudioPlayer {
@@ -16,20 +17,20 @@ public class AudioPlayer {
 	private static Map<String, Sound> soundMap = new HashMap<String, Sound>();
 	private static Map<String, Music> musicMap = new HashMap<String, Music>();
 	
-	public static void addSound(String key, String name){
+	public static void addSound(String key, String path){
 		try {
-			soundMap.put(key, new Sound(Loader.resAudio(name)) );
+			soundMap.put(key, new Sound(Loader.Audio(path)) );
 		} catch (SlickException e) {
-			System.out.println("Invalid Audio File: " + Loader.resAudio(name).toString());
+			System.out.println("Invalid Audio File: " + Loader.Audio(path).toString());
 			e.printStackTrace();
 		}
 	}
 	
-	public static void addMusic(String key, String name){
+	public static void addMusic(String key, String path){
 		try {
-			musicMap.put(key, new Music(Loader.resAudio(name)) );
+			musicMap.put(key, new Music(Loader.Audio(path)) );
 		} catch (SlickException e) {
-			System.out.println("Invalid Audio File: " + Loader.resAudio(name).toString());
+			System.out.println("Invalid Audio File: " + Loader.Audio(path).toString());
 			e.printStackTrace();
 		}
 	}
