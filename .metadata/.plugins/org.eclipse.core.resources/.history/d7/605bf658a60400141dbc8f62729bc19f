@@ -1,0 +1,130 @@
+package mapcreator;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import tools.Button;
+
+public class Objects extends section{
+	
+	private Panel p;
+	private ArrayList<String> Types;
+	private int x = CreatorApp.width*4/5, y = 35,width = CreatorApp.width/5,height = CreatorApp.height/2 -35;
+	
+	private Button[] types;
+	
+	public Objects(Panel p){
+		this.p = p;
+		types = new Button[p.ca.Types.size()];
+		System.out.println(p.ca.Types.get(1) );
+		for(int bbb = 0; bbb<types.length; bbb++)
+			types[bbb] = new button(p.ca.Types.get(bbb).toString(), new Rectangle(x, (bbb*5) + y, width, 5), 5);
+	}
+	
+	
+	
+	@Override
+	public void Step() {
+		
+		
+	}
+	
+	@Override
+	public void render(Graphics g) {
+		g.setColor(Color.orange);
+		g.fillRect(x, y, width, height);
+		
+		for(int bbb = 0; bbb<types.length; bbb++)
+			if(types[bbb].rect.y < y + height - 5)
+				types[bbb].render(g);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+		
+	}
+	
+	
+	private class button extends Button{
+		
+		String id;
+
+		public button(String id, Rectangle rect, int xOffset) {
+			super(id, rect, xOffset);
+			disabled = Color.gray;
+			normal = Color.BLACK;
+			System.out.println("test");
+		}
+		
+		@Override
+		public void Clicked() {
+			super.Clicked();
+			if(p.pixelSelected !=null){
+				p.CreateThing(new TempThing(id, p.pixelSelected.x, p.pixelSelected.y) );
+			}
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+		
+	}
+
+	
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+		
+	}
+
+}

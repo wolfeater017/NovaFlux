@@ -1,0 +1,219 @@
+package mapcreator;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import javax.swing.JPanel;
+
+
+public class Panel extends JPanel implements Runnable{
+	
+	
+	
+	/**
+	 * @author Ben Bemis
+	 */
+	private static final long serialVersionUID = 5242695194841664819L;
+
+	protected CreatorApp ca;
+	
+	private Thread thread;
+	private boolean running = false;
+	protected int SPS,FPS; //SPS - Steps in the last Second - Steps per second
+	 //FPS - number of renders in the last second - frames per second
+	
+	private ArrayList<section> sections = new ArrayList<section>();
+	
+	public Panel(CreatorApp ca){
+		this.ca = ca;
+		sections.add(  new Manipulator(this) );
+		sections.add( new Objects(this) );
+	}
+	
+	
+	
+	public void Step(){
+		for( int bbb = 0; bbb<sections.size(); bbb++)
+			sections.get(bbb).Step();
+	}
+	
+	@Override
+	public void paint(Graphics g){
+		g.setColor(Color.GREEN);
+		g.fillRect(0, 0, CreatorApp.width, CreatorApp.height);
+		
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).render(g);
+	}
+	
+	public void CreateThing(int x, int y){
+		System.out.println("create thing");
+	}
+	
+	
+	
+	public void mouseClicked(MouseEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).mouseClicked(e);
+		
+	}
+
+
+	
+	public void mouseEntered(MouseEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).mouseEntered(e);
+		
+	}
+
+
+
+	public void mouseExited(MouseEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).mouseExited(e);
+		
+	}
+
+
+	
+	public void mousePressed(MouseEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).mousePressed(e);
+		
+	}
+
+
+	
+	public void mouseReleased(MouseEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).mouseReleased(e);
+		
+	}
+
+
+	
+	public void mouseDragged(MouseEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).mouseDragged(e);
+		
+	}
+
+
+	
+	public void mouseMoved(MouseEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).mouseMoved(e);
+		
+	}
+
+
+	
+	public void keyPressed(KeyEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).keyPressed(e);
+		
+	}
+
+
+	
+	public void keyReleased(KeyEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).keyReleased(e);
+		
+	}
+
+
+	
+	public void keyTyped(KeyEvent e) {
+		for(int bbb =0; bbb<sections.size(); bbb++)
+			sections.get(bbb).keyTyped(e);
+		
+	}
+	
+	
+	
+
+
+	
+	/**
+	 * NEVER ALTER THIS METHOD
+	 * NEVER CALL THIS METHOD IN A SUBCLASS
+	 */
+	@Override
+	public void run() {
+		
+		long lastTime = System.nanoTime();
+		final double numTicks = 60.0;
+		double n = 1000000000 / numTicks;
+		double delta = 0;
+		int frames = 0;
+		int ticks = 0;
+		long timer = System.currentTimeMillis();
+		
+		while(running){
+			long currentTime = System.nanoTime();
+			delta +=(currentTime - lastTime)/n;
+			lastTime = currentTime;
+			
+			if(delta >=1){
+				Step();
+				ticks++;
+				delta--;
+			}
+			
+			repaint();
+
+			frames++;
+			
+			if(System.currentTimeMillis() - timer > 1000){
+				timer+=1000;
+//				System.out.println(ticks + " Ticks, FPS: " + frames);
+			
+				//ticks are the number of Iterations in the last second
+				//FPS is the number of renders in the last second
+				this.SPS = ticks;
+				this.FPS = frames;
+				ticks = 0;
+				frames = 0;
+			}
+		}
+		
+		stop();
+		
+	}
+	
+	/**
+	 * Relates directly to Game Loop, NEVER ALTER
+	 */
+	public synchronized void start(){
+		if(running)
+			return;
+		else
+			running = true;
+		
+		thread = new Thread(this);
+		thread.start();
+	}
+	/**
+	 * Relates directly to Game Loop, NEVER ALTER
+	 */
+	private synchronized void stop(){
+		if(!running)
+			return;
+		else 
+			running = false;
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		System.exit(1);
+	}
+
+}

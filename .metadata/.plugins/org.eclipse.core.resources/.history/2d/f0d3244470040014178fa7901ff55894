@@ -1,0 +1,20 @@
+package mapcreator;
+
+
+import runtime.Driver;
+import runtime.GamePanel;
+
+public class CreatorPanel extends GamePanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3820251631633799971L;
+
+	public CreatorPanel(Driver game) {
+		super(game);
+		
+		
+		
+	}
+}

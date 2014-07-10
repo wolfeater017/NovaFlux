@@ -1,0 +1,30 @@
+package org.newdawn.slick;
+
+import java.awt.Canvas;
+
+// Referenced classes of package org.newdawn.slick:
+//            AppletGameContainer
+
+class this._cls0 extends Canvas
+{
+
+    final AppletGameContainer this$0;
+
+    public final void addNotify()
+    {
+        super.addNotify();
+        startLWJGL();
+    }
+
+    public final void removeNotify()
+    {
+        AppletGameContainer.access$000(AppletGameContainer.this);
+        super.removeNotify();
+    }
+
+    ()
+    {
+        this$0 = AppletGameContainer.this;
+        super();
+    }
+}

@@ -1,0 +1,21 @@
+package org.newdawn.slick;
+
+import java.util.Comparator;
+import org.newdawn.slick.font.Glyph;
+
+// Referenced classes of package org.newdawn.slick:
+//            UnicodeFont
+
+static class 
+    implements Comparator
+{
+
+    public int compare(Object o1, Object o2)
+    {
+        return ((Glyph)o1).getHeight() - ((Glyph)o2).getHeight();
+    }
+
+    ()
+    {
+    }
+}

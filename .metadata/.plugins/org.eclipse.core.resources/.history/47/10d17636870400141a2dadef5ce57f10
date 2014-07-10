@@ -1,0 +1,200 @@
+package mapcreator;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
+
+
+public class Panel extends JPanel implements Runnable{
+	
+	
+	
+	/**
+	 * @author Ben Bemis
+	 */
+	private static final long serialVersionUID = 5242695194841664819L;
+
+	protected CreatorApp ca;
+	
+	private Thread thread;
+	private boolean running = false;
+	protected int SPS,FPS; //SPS - Steps in the last Second - Steps per second
+	 //FPS - number of renders in the last second - frames per second
+	
+	private Manipulator m;
+	
+	public Panel(CreatorApp ca){
+		this.ca = ca;
+		this.m = new Manipulator();
+	}
+	
+	
+	
+	public void Step(){
+		m.Step();
+	}
+	
+	public void paint(Graphics g){
+		g.setColor(Color.GREEN);
+		g.fillRect(0, 0, CreatorApp.width, CreatorApp.height);
+		
+		m.renderM(g);
+	}
+	
+	
+	
+	public void mouseClicked(MouseEvent e) {
+		
+		
+	}
+
+
+	
+	public void mouseEntered(MouseEvent e) {
+		
+		
+	}
+
+
+
+	public void mouseExited(MouseEvent e) {
+		
+		
+	}
+
+
+	
+	public void mousePressed(MouseEvent e) {
+	
+		
+	}
+
+
+	
+	public void mouseReleased(MouseEvent e) {
+		
+		
+	}
+
+
+	
+	public void mouseDragged(MouseEvent e) {
+		
+		
+	}
+
+
+	
+	public void mouseMoved(MouseEvent e) {
+		
+		
+	}
+
+
+	
+	public void keyPressed(KeyEvent e) {
+		
+		
+	}
+
+
+	
+	public void keyReleased(KeyEvent e) {
+		
+		
+	}
+
+
+	
+	public void keyTyped(KeyEvent e) {
+		
+		
+	}
+	
+	
+	
+
+
+	
+	/**
+	 * NEVER ALTER THIS METHOD
+	 * NEVER CALL THIS METHOD IN A SUBCLASS
+	 */
+	@Override
+	public void run() {
+		
+		long lastTime = System.nanoTime();
+		final double numTicks = 60.0;
+		double n = 1000000000 / numTicks;
+		double delta = 0;
+		int frames = 0;
+		int ticks = 0;
+		long timer = System.currentTimeMillis();
+		
+		while(running){
+			long currentTime = System.nanoTime();
+			delta +=(currentTime - lastTime)/n;
+			lastTime = currentTime;
+			
+			if(delta >=1){
+				Step();
+				ticks++;
+				delta--;
+			}
+			
+			repaint();
+
+			frames++;
+			
+			if(System.currentTimeMillis() - timer > 1000){
+				timer+=1000;
+//				System.out.println(ticks + " Ticks, FPS: " + frames);
+			
+				//ticks are the number of Iterations in the last second
+				//FPS is the number of renders in the last second
+				this.SPS = ticks;
+				this.FPS = frames;
+				ticks = 0;
+				frames = 0;
+			}
+		}
+		
+		stop();
+		
+	}
+	
+	/**
+	 * Relates directly to Game Loop, NEVER ALTER
+	 */
+	public synchronized void start(){
+		if(running)
+			return;
+		else
+			running = true;
+		
+		thread = new Thread(this);
+		thread.start();
+	}
+	/**
+	 * Relates directly to Game Loop, NEVER ALTER
+	 */
+	private synchronized void stop(){
+		if(!running)
+			return;
+		else 
+			running = false;
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		System.exit(1);
+	}
+
+}

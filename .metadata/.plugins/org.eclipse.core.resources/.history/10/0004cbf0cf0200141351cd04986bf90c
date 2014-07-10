@@ -1,0 +1,14 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            ControlledInputReciever
+
+public interface KeyListener
+    extends ControlledInputReciever
+{
+
+    public abstract void keyPressed(int i, char c);
+
+    public abstract void keyReleased(int i, char c);
+}

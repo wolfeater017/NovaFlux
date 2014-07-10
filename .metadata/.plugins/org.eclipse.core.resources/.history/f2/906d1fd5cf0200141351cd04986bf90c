@@ -1,0 +1,22 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            SlickException, GameContainer, Graphics
+
+public interface Game
+{
+
+    public abstract void init(GameContainer gamecontainer)
+        throws SlickException;
+
+    public abstract void update(GameContainer gamecontainer, int i)
+        throws SlickException;
+
+    public abstract void render(GameContainer gamecontainer, Graphics g)
+        throws SlickException;
+
+    public abstract boolean closeRequested();
+
+    public abstract String getTitle();
+}

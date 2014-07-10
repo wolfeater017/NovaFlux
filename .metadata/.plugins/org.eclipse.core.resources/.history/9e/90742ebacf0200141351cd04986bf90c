@@ -1,0 +1,20 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            UnicodeFont
+
+public static class 
+{
+
+    boolean invalid;
+    int id;
+    Short yOffset;
+    public short width;
+    public short height;
+    public Object userData;
+
+    ()
+    {
+    }
+}

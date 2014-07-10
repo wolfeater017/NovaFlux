@@ -1,0 +1,7 @@
+package mapcreator;
+
+import javax.swing.JFrame;
+
+public class PathForm extends JFrame{
+
+}

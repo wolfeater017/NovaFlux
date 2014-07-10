@@ -1,0 +1,122 @@
+package mapcreator;
+
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
+
+
+public class CreatorApp extends JFrame  implements KeyListener,MouseMotionListener,MouseListener{
+
+	/**
+	 * @author Ben Bemis
+	 */
+	private static final long serialVersionUID = 3820251631633799971L;
+	public static int width = 900,height;
+	ArrayList<String> Types = new ArrayList<String>();
+	
+	Panel panel;
+	
+
+	public <E extends Enum<E>>CreatorApp(Class<E> ThingTypes ) {
+		super();
+		
+		addKeyListener(this);
+		addMouseMotionListener(this);
+		addMouseListener(this);
+		
+		setSize(width, width/4*3);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFocusable(true);
+		add( panel = new Panel(this) );
+		panel.setVisible(true);
+		setVisible(true);
+		
+		for(@SuppressWarnings("unused") Enum<E> enumVal: ThingTypes.getEnumConstants() )
+			Types.add( ThingTypes.toString() );
+		
+		System.out.println("Enumeration Loaded");
+		panel.start();
+	}
+
+	
+	
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+		
+	}
+	
+	
+	
+}

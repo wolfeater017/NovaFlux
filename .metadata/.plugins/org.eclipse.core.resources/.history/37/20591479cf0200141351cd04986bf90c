@@ -1,0 +1,21 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            Color
+
+public interface Font
+{
+
+    public abstract int getWidth(String s);
+
+    public abstract int getHeight(String s);
+
+    public abstract int getLineHeight();
+
+    public abstract void drawString(float f, float f1, String s);
+
+    public abstract void drawString(float f, float f1, String s, Color color);
+
+    public abstract void drawString(float f, float f1, String s, Color color, int i, int j);
+}

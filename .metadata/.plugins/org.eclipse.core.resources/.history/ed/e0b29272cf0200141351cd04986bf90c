@@ -1,0 +1,32 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            SlickException, CanvasGameContainer
+
+class this._cls0
+    implements Runnable
+{
+
+    final CanvasGameContainer this$0;
+
+    public void run()
+    {
+        try
+        {
+            container.gameLoop();
+        }
+        catch(SlickException e)
+        {
+            e.printStackTrace();
+        }
+        container.checkDimensions();
+        CanvasGameContainer.access$000(CanvasGameContainer.this);
+    }
+
+    ntainer()
+    {
+        this$0 = CanvasGameContainer.this;
+        super();
+    }
+}

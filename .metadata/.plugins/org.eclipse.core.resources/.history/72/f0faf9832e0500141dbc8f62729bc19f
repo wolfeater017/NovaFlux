@@ -1,0 +1,129 @@
+package mapcreator;
+
+import java.awt.FileDialog;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+import Graphic.TextMap;
+import runtime.Loader;
+
+public class FileManager {
+	
+	private CreatorApp ca;
+	
+	public static String FileName;
+	public static String Dir;
+	
+	public FileManager(CreatorApp ca){
+		this.ca = ca;
+	}
+	
+	public void LoadFile(){
+		FileDialog fd = new FileDialog(ca,"Load Map",FileDialog.LOAD);
+		fd.setFilenameFilter(new FilenameFilter(){
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".txt");
+			}
+		});
+		fd.setVisible(true);
+		FileName = fd.getFile();
+		Dir = fd.getDirectory();
+		System.out.println(Dir + FileName);
+		
+		try {
+			Scanner read = new Scanner( new File(Dir + FileName) );
+			while(read.hasNextLine() ){//each line is an object to be added to things
+				
+				String ID;
+				int x,y;
+				boolean visibility;
+				ArrayList<Object> obj = new ArrayList<Object>();
+				
+				String line = read.nextLine();
+				System.out.println("first Line: " + line);
+				String[] tokens = line.split(Pattern.quote(" ") );
+				ID = tokens[0];
+				x = Integer.parseInt( tokens[1] );
+				y = Integer.parseInt( tokens[2] );
+				
+				if(tokens[3].equalsIgnoreCase("true") )
+					visibility = true;
+				else
+					visibility = false;
+				
+				
+				for(int bbb = 4; bbb<tokens.length; bbb++){
+					obj.add( TextMap.AdditionalObjectHandler( tokens[bbb] ) );
+				}
+				
+				Object[] temp = new Object[obj.size()];
+				for(int bbb = 0; bbb<temp.length; bbb++)
+					temp[bbb] = obj.get(bbb);
+				
+				Manipulator.things.add( new TempThing(ID, x, y) );
+				
+			}
+			
+			
+			read.close();
+		}catch(IOException e){
+			System.out.println("Error Loading File");
+			e.printStackTrace();
+		}
+	}
+	
+	public void SaveFile(){
+		
+		FileDialog fd = new FileDialog(ca, "Save Map", FileDialog.SAVE);
+		fd.setFilenameFilter(new FilenameFilter(){
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".txt");
+			}
+		});
+		if(FileName==null)
+			fd.setFile("UntitledMap.txt");
+		else
+			fd.setFile(FileName);
+		
+		fd.setVisible(true);
+		FileName = fd.getFile();
+		System.out.println("File: "+ FileName );
+		Dir = fd.getDirectory();
+		System.out.println("Directory: " + Dir );
+		
+		if(FileName!=null && Dir!=null){//Save Map
+			File file = new File(Dir + FileName);
+			if(!file.exists() ){
+				try {
+					file.createNewFile();
+				} catch (IOException e) {
+					System.out.println("Failed to Create new Text File");
+					e.printStackTrace();
+				}
+			}
+			
+			try {
+				
+				FileWriter fw = new FileWriter(file.getAbsoluteFile());
+				String data = "";
+				for( int bbb = 0; bbb<Manipulator.things.size(); bbb++)
+					data += "\n" + Manipulator.things.get(bbb).toString();
+				fw.write(data);
+				fw.close();
+				
+			} catch (IOException e) {
+				System.out.println("Could not load File");
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+}

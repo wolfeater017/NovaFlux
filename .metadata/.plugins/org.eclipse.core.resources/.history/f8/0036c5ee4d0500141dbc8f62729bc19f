@@ -1,0 +1,36 @@
+package mapcreator;
+
+import java.awt.Rectangle;
+import java.util.regex.Pattern;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
+import Reference.ID;
+import tools.Path;
+
+public class SubThings {
+	
+	Rectangle rect;
+	Path path;
+	String id;
+	
+	public SubThings(String s){
+		
+		String[] data = s.split(Pattern.quote("/") );
+		id = data[0];
+		switch(id){
+		case "PATH":
+			path = new Path(s);
+			break;
+		case "RECTANGLE":
+			break;
+		
+		}
+	}
+	
+	
+	public String toString(){
+		return null;
+	}
+
+}

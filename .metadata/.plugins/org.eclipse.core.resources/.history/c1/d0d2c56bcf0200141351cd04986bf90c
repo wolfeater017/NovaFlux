@@ -1,0 +1,55 @@
+package org.newdawn.slick;
+
+import java.security.PrivilegedAction;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.PixelFormat;
+import org.newdawn.slick.util.Log;
+
+// Referenced classes of package org.newdawn.slick:
+//            AppGameContainer, GameContainer
+
+class this._cls0
+    implements PrivilegedAction
+{
+
+    final AppGameContainer this$0;
+
+    public Object run()
+    {
+        try
+        {
+            PixelFormat format = new PixelFormat(8, 8, GameContainer.stencil ? 8 : 0, samples);
+            AppGameContainer.access$000(AppGameContainer.this, format);
+            supportsMultiSample = true;
+        }
+        catch(Exception e)
+        {
+            Display.destroy();
+            try
+            {
+                PixelFormat format = new PixelFormat(8, 8, GameContainer.stencil ? 8 : 0);
+                AppGameContainer.access$000(AppGameContainer.this, format);
+                alphaSupport = false;
+            }
+            catch(Exception e2)
+            {
+                Display.destroy();
+                try
+                {
+                    AppGameContainer.access$000(AppGameContainer.this, new PixelFormat());
+                }
+                catch(Exception e3)
+                {
+                    Log.error(e3);
+                }
+            }
+        }
+        return null;
+    }
+
+    ()
+    {
+        this$0 = AppGameContainer.this;
+        super();
+    }
+}

@@ -1,0 +1,145 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            Game, InputListener, SlickException, Input, 
+//            GameContainer
+
+public abstract class BasicGame
+    implements Game, InputListener
+{
+
+    private static final int MAX_CONTROLLERS = 20;
+    private static final int MAX_CONTROLLER_BUTTONS = 100;
+    private String title;
+    protected boolean controllerLeft[];
+    protected boolean controllerRight[];
+    protected boolean controllerUp[];
+    protected boolean controllerDown[];
+    protected boolean controllerButton[][];
+
+    public BasicGame(String title)
+    {
+        controllerLeft = new boolean[20];
+        controllerRight = new boolean[20];
+        controllerUp = new boolean[20];
+        controllerDown = new boolean[20];
+        controllerButton = new boolean[20][100];
+        this.title = title;
+    }
+
+    public void setInput(Input input1)
+    {
+    }
+
+    public boolean closeRequested()
+    {
+        return true;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public abstract void init(GameContainer gamecontainer)
+        throws SlickException;
+
+    public void keyPressed(int i, char c1)
+    {
+    }
+
+    public void keyReleased(int i, char c1)
+    {
+    }
+
+    public void mouseMoved(int i, int j, int k, int l)
+    {
+    }
+
+    public void mouseDragged(int i, int j, int k, int l)
+    {
+    }
+
+    public void mouseClicked(int i, int j, int k, int l)
+    {
+    }
+
+    public void mousePressed(int i, int j, int k)
+    {
+    }
+
+    public void controllerButtonPressed(int controller, int button)
+    {
+        controllerButton[controller][button] = true;
+    }
+
+    public void controllerButtonReleased(int controller, int button)
+    {
+        controllerButton[controller][button] = false;
+    }
+
+    public void controllerDownPressed(int controller)
+    {
+        controllerDown[controller] = true;
+    }
+
+    public void controllerDownReleased(int controller)
+    {
+        controllerDown[controller] = false;
+    }
+
+    public void controllerLeftPressed(int controller)
+    {
+        controllerLeft[controller] = true;
+    }
+
+    public void controllerLeftReleased(int controller)
+    {
+        controllerLeft[controller] = false;
+    }
+
+    public void controllerRightPressed(int controller)
+    {
+        controllerRight[controller] = true;
+    }
+
+    public void controllerRightReleased(int controller)
+    {
+        controllerRight[controller] = false;
+    }
+
+    public void controllerUpPressed(int controller)
+    {
+        controllerUp[controller] = true;
+    }
+
+    public void controllerUpReleased(int controller)
+    {
+        controllerUp[controller] = false;
+    }
+
+    public void mouseReleased(int i, int j, int k)
+    {
+    }
+
+    public abstract void update(GameContainer gamecontainer, int i)
+        throws SlickException;
+
+    public void mouseWheelMoved(int i)
+    {
+    }
+
+    public boolean isAcceptingInput()
+    {
+        return true;
+    }
+
+    public void inputEnded()
+    {
+    }
+
+    public void inputStarted()
+    {
+    }
+}

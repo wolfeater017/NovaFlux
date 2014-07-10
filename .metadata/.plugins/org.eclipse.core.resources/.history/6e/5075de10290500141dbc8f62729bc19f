@@ -1,0 +1,24 @@
+package mapcreator;
+
+import java.awt.FileDialog;
+
+import runtime.Loader;
+
+public class FileManager {
+	
+	private CreatorApp ca;
+	
+	public FileManager(CreatorApp ca){
+		this.ca = ca;
+	}
+	
+	public void LoadFile(){
+		
+	}
+	
+	public void SaveFile(){
+		
+		FileDialog fd = new FileDialog(ca, "Save Map", FileDialog.SAVE);
+	}
+
+}

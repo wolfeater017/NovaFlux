@@ -1,0 +1,14 @@
+package mapcreator;
+
+public class SubThings {
+	
+	public SubThings(){
+		
+	}
+	
+	
+	public String toString(){
+		return null;
+	}
+
+}

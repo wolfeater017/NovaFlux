@@ -1,0 +1,25 @@
+package org.newdawn.slick;
+
+import java.awt.Rectangle;
+import java.awt.font.GlyphVector;
+import org.newdawn.slick.font.Glyph;
+
+// Referenced classes of package org.newdawn.slick:
+//            UnicodeFont
+
+class it> extends Glyph
+{
+
+    final UnicodeFont this$0;
+
+    public boolean isMissing()
+    {
+        return true;
+    }
+
+    (int x0, Rectangle x1, GlyphVector x2, int x3, UnicodeFont x4)
+    {
+        this$0 = UnicodeFont.this;
+        super(x0, x1, x2, x3, x4);
+    }
+}

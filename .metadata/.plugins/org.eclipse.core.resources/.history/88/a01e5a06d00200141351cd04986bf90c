@@ -1,0 +1,24 @@
+package org.newdawn.slick.command;
+
+
+// Referenced classes of package org.newdawn.slick.command:
+//            ControllerControl
+
+public class ControllerButtonControl extends ControllerControl
+{
+
+    public ControllerButtonControl(int controllerIndex, int button)
+    {
+        super(controllerIndex, 0, button);
+    }
+
+    public volatile int hashCode()
+    {
+        return super.hashCode();
+    }
+
+    public volatile boolean equals(Object x0)
+    {
+        return super.equals(x0);
+    }
+}

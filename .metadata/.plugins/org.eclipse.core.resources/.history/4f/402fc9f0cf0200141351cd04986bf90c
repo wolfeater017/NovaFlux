@@ -1,0 +1,10 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            MouseListener, KeyListener, ControllerListener
+
+public interface InputListener
+    extends MouseListener, KeyListener, ControllerListener
+{
+}

@@ -1,0 +1,51 @@
+package mapcreator;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.util.ArrayList;
+
+public class TempThing {
+	
+	String id;
+	public int x,y;
+	boolean visibility;
+	ArrayList<SubThings> subs = new ArrayList<SubThings>();
+	
+	public TempThing(String id,int x, int y){
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		visibility = true;
+	}
+	
+	public void Step(){
+		
+	}
+	
+	public void render(Graphics g){
+		if(visibility)
+			g.setColor(Color.BLACK);
+		else
+			g.setColor(Color.RED);
+		
+		g.fillRect(x*Manipulator.GridSpacing,Manipulator.y +( (y)*Manipulator.GridSpacing), Manipulator.GridSpacing, Manipulator.GridSpacing);
+		g.setColor(Color.white);
+		g.setFont(new Font("Arial", Font.BOLD, 10) );
+		g.drawString( String.valueOf( id.charAt(0) ) ,x*Manipulator.GridSpacing +2,Manipulator.y + (y*Manipulator.GridSpacing) + Manipulator.GridSpacing);
+		
+	}
+	
+	public String toString(){
+		String temp = id + " " + x + " " + y;
+		if(visibility)
+			temp += " true";
+		else
+			temp += " false";
+		for(int bbb = 0; bbb<subs.size(); bbb++)
+			temp+= " " + subs.get(bbb).toString();
+		
+		return temp;
+	}
+
+}

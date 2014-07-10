@@ -1,0 +1,102 @@
+package mapcreator;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+public class Properties extends section{
+	
+	private final int x = CreatorApp.width*4/5, y = CreatorApp.height/2 -35,width = CreatorApp.width/5,height = CreatorApp.height/2 -35;
+	private Panel p;
+	
+	private String header;
+	private Font headerFont = new Font("Arial", Font.PLAIN, 13);
+	
+	public Properties(Panel p){
+		this.p = p;
+		header = "Properties: ";
+	}
+	
+	@Override
+	public void Step() {
+		if(p.Selected!=null)
+			header = "Properties: " + p.Selected.id;
+		else
+			header = "Properties: ";
+		
+	}
+
+	@Override
+	public void render(Graphics g) {
+		g.setColor(Color.ORANGE);
+		g.fillRect(x, y, width, height);
+		
+		g.setColor(Color.black);
+		g.setFont(headerFont);
+		g.drawString(header, x + 10, y+10);
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+		
+	}
+
+}

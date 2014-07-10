@@ -1,0 +1,30 @@
+package org.newdawn.slick;
+
+import java.security.PrivilegedAction;
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.util.Log;
+
+// Referenced classes of package org.newdawn.slick:
+//            AppGameContainer
+
+static class 
+    implements PrivilegedAction
+{
+
+    public Object run()
+    {
+        try
+        {
+            Display.getDisplayMode();
+        }
+        catch(Exception e)
+        {
+            Log.error(e);
+        }
+        return null;
+    }
+
+    ()
+    {
+    }
+}

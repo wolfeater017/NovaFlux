@@ -1,0 +1,95 @@
+package mapcreator;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+public class Objects extends section{
+	
+	private Panel p;
+	private ArrayList<String> Types;
+	private int x = CreatorApp.width*4/5, y = 35,width = CreatorApp.width/5,height = CreatorApp.height/2 -35;
+
+	public Objects(Panel p){
+		this.p = p;
+		Types = p.ca.Types;
+	}
+	
+	
+	
+	@Override
+	public void Step() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void render(Graphics g) {
+		g.setColor(Color.orange);
+		g.fillRect(x, y, width, height);
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

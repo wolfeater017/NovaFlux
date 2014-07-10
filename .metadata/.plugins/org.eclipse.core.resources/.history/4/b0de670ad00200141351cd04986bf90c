@@ -1,0 +1,156 @@
+package org.newdawn.slick.command;
+
+import java.util.HashMap;
+import org.newdawn.slick.util.InputAdapter;
+
+// Referenced classes of package org.newdawn.slick.command:
+//            KeyControl, Command, MouseButtonControl, ControllerDirectionControl, 
+//            ControllerButtonControl, InputProvider
+
+private class <init> extends InputAdapter
+{
+
+    final InputProvider this$0;
+
+    public boolean isAcceptingInput()
+    {
+        return true;
+    }
+
+    public void keyPressed(int key, char c)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new KeyControl(key));
+        if(command != null)
+        {
+            firePressed(command);
+        }
+    }
+
+    public void keyReleased(int key, char c)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new KeyControl(key));
+        if(command != null)
+        {
+            fireReleased(command);
+        }
+    }
+
+    public void mousePressed(int button, int x, int y)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new MouseButtonControl(button));
+        if(command != null)
+        {
+            firePressed(command);
+        }
+    }
+
+    public void mouseReleased(int button, int x, int y)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new MouseButtonControl(button));
+        if(command != null)
+        {
+            fireReleased(command);
+        }
+    }
+
+    public void controllerLeftPressed(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.LEFT));
+        if(command != null)
+        {
+            firePressed(command);
+        }
+    }
+
+    public void controllerLeftReleased(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.LEFT));
+        if(command != null)
+        {
+            fireReleased(command);
+        }
+    }
+
+    public void controllerRightPressed(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.RIGHT));
+        if(command != null)
+        {
+            firePressed(command);
+        }
+    }
+
+    public void controllerRightReleased(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.RIGHT));
+        if(command != null)
+        {
+            fireReleased(command);
+        }
+    }
+
+    public void controllerUpPressed(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.UP));
+        if(command != null)
+        {
+            firePressed(command);
+        }
+    }
+
+    public void controllerUpReleased(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.UP));
+        if(command != null)
+        {
+            fireReleased(command);
+        }
+    }
+
+    public void controllerDownPressed(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.DOWN));
+        if(command != null)
+        {
+            firePressed(command);
+        }
+    }
+
+    public void controllerDownReleased(int controller)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerDirectionControl(controller, ControllerDirectionControl.DOWN));
+        if(command != null)
+        {
+            fireReleased(command);
+        }
+    }
+
+    public void controllerButtonPressed(int controller, int button)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerButtonControl(controller, button));
+        if(command != null)
+        {
+            firePressed(command);
+        }
+    }
+
+    public void controllerButtonReleased(int controller, int button)
+    {
+        Command command = (Command)InputProvider.access$400(InputProvider.this).get(new ControllerButtonControl(controller, button));
+        if(command != null)
+        {
+            fireReleased(command);
+        }
+    }
+
+    private tion()
+    {
+        this$0 = InputProvider.this;
+        super();
+    }
+
+    this._cls0(this._cls0 x1)
+    {
+        this();
+    }
+}

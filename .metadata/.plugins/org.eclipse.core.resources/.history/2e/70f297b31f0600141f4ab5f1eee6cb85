@@ -1,0 +1,41 @@
+package mapcreator;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import tools.Path;
+
+public class PathForm extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4013469739190992663L;
+	
+	Path path;
+	
+	Panel panel;
+	
+	public PathForm(){
+		
+		setResizable(false);
+		setSize(500, 500);
+		setTitle("Enter Path");
+		add( panel = new Panel() );
+		panel.setVisible(true);
+		setVisible(true);
+	}
+	
+	
+	
+	private class Panel extends JPanel{
+		
+		
+		public Panel(){
+			
+		}
+		
+	}
+	
+
+}

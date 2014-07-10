@@ -1,0 +1,47 @@
+package ai;
+
+import java.awt.Graphics;
+import java.awt.Point;
+
+import Graphic.Sprite;
+import runtime.GamePanel;
+import tools.AI;
+import tools.LM;
+import tools.Mask;
+import tools.Path;
+
+public class IceCube extends AI{
+	
+	protected Sprite sprite;
+
+	public IceCube(int Startx, int Starty, int xDirection, int yDirection) {
+		super(Startx, Starty, xDirection, yDirection);
+		sprite = new Sprite(.2, .2, 1, LM.ICE_CUBE);
+		mask = new Mask(0, 0, sprite.getWidth()*sprite.xscale, sprite.getHeight()*sprite.yscale);
+		mask.setThing(this);
+	}
+	public IceCube(GamePanel gp) {
+	super(new Path(0, new Point(-300, 10),new Point(-300, 100),new Point(-250, 100) ),
+			1.0,1.0,10.0,10.0);
+		sprite = new Sprite(.2, .2, 1, LM.ICE_CUBE);
+		mask = new Mask(0, 0, sprite.getWidth()*sprite.xscale, sprite.getHeight()*sprite.yscale);
+		mask.setThing(this);
+		this.gp = gp;
+	}
+	
+	
+	@Override
+	public void Step() {
+		// TODO Auto-generated method stub
+		super.Step();
+		sprite.Step();
+	}
+	
+	
+	@Override
+	public void render(Graphics g) {
+		// TODO Auto-generated method stub
+		super.render(g);
+		sprite.render(g, x, y);
+	}
+}

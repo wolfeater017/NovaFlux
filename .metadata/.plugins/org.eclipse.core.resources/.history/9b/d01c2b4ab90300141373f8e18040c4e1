@@ -1,0 +1,64 @@
+package tools;
+
+import java.awt.Point;
+
+public class Path {
+	
+	private Point[] points;
+	private int Index;
+	private boolean positive;
+	
+	public Path(int Index, Point...points) {
+		this.points = points;
+		this.Index = Index;
+		positive = isNextPoint();
+	}
+	
+
+	
+	public boolean isLastPoint(){
+		if(Index != 0)
+			return true;
+		else
+			return false;
+	}
+	public boolean isNextPoint(){
+		if(Index != points.length - 1)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean StepIndex(){
+		
+		if(positive){
+			if(isNextPoint() )
+				++Index;
+			else{
+				
+				positive = false;
+				return false;
+			}
+		}
+		else{
+			if(isLastPoint() ){
+				positive = false;
+				--Index;
+			}
+			else{
+				positive = true;
+				return false;
+			}
+				
+		}
+		System.out.println("step" + Index);
+		System.out.println("positive: " + positive);
+		System.out.println("points - 1: " + (points.length -1) );
+		return true;
+	}
+	
+	public Point getPoint(int index){ return points[index];	}
+	public Point getLastPoint(){ return points[Index-1]; }
+	public Point getNextPoint(){return points[Index+1]; }
+
+}

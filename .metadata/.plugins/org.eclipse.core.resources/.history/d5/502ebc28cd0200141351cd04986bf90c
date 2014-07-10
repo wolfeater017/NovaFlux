@@ -1,0 +1,78 @@
+package org.lwjgl;
+
+import java.awt.Toolkit;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+
+// Referenced classes of package org.lwjgl:
+//            J2SESysImplementation, LWJGLUtil
+
+final class LinuxSysImplementation extends J2SESysImplementation
+{
+
+    private static final int JNI_VERSION = 19;
+
+    LinuxSysImplementation()
+    {
+    }
+
+    public int getRequiredJNIVersion()
+    {
+        return 19;
+    }
+
+    public boolean openURL(String url)
+    {
+        String arr$[];
+        int len$;
+        int i$;
+        String browsers[] = {
+            "sensible-browser", "xdg-open", "google-chrome", "chromium", "firefox", "iceweasel", "mozilla", "opera", "konqueror", "nautilus", 
+            "galeon", "netscape"
+        };
+        arr$ = browsers;
+        len$ = arr$.length;
+        i$ = 0;
+_L2:
+        String browser;
+        if(i$ >= len$)
+        {
+            break; /* Loop/switch isn't completed */
+        }
+        browser = arr$[i$];
+        LWJGLUtil.execPrivileged(new String[] {
+            browser, url
+        });
+        return true;
+        Exception e;
+        e;
+        e.printStackTrace(System.err);
+        i$++;
+        if(true) goto _L2; else goto _L1
+_L1:
+        return false;
+    }
+
+    public boolean has64Bit()
+    {
+        return true;
+    }
+
+    static 
+    {
+        Toolkit.getDefaultToolkit();
+        AccessController.doPrivileged(new PrivilegedAction() {
+
+            public Object run()
+            {
+                try
+                {
+                    System.loadLibrary("jawt");
+                }
+                catch(UnsatisfiedLinkError e) { }
+                return null;
+            }
+
+        });
+    }
+}

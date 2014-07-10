@@ -1,0 +1,30 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            ControlledInputReciever
+
+public interface ControllerListener
+    extends ControlledInputReciever
+{
+
+    public abstract void controllerLeftPressed(int i);
+
+    public abstract void controllerLeftReleased(int i);
+
+    public abstract void controllerRightPressed(int i);
+
+    public abstract void controllerRightReleased(int i);
+
+    public abstract void controllerUpPressed(int i);
+
+    public abstract void controllerUpReleased(int i);
+
+    public abstract void controllerDownPressed(int i);
+
+    public abstract void controllerDownReleased(int i);
+
+    public abstract void controllerButtonPressed(int i, int j);
+
+    public abstract void controllerButtonReleased(int i, int j);
+}

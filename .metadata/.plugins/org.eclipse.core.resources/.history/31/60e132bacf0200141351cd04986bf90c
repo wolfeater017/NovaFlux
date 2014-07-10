@@ -1,0 +1,26 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            TrueTypeFont
+
+private class <init>
+{
+
+    public int width;
+    public int height;
+    public int storedX;
+    public int storedY;
+    final TrueTypeFont this$0;
+
+    private ()
+    {
+        this$0 = TrueTypeFont.this;
+        super();
+    }
+
+    this._cls0(this._cls0 x1)
+    {
+        this();
+    }
+}

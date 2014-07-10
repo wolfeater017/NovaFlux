@@ -1,0 +1,38 @@
+package org.newdawn.slick;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+
+// Referenced classes of package org.newdawn.slick:
+//            PackedSpriteSheet
+
+private class tilesy
+{
+
+    public int x;
+    public int y;
+    public int width;
+    public int height;
+    public int tilesx;
+    public int tilesy;
+    public String name;
+    final PackedSpriteSheet this$0;
+
+    public (BufferedReader reader)
+        throws IOException
+    {
+        this$0 = PackedSpriteSheet.this;
+        super();
+        name = reader.readLine().trim();
+        x = Integer.parseInt(reader.readLine().trim());
+        y = Integer.parseInt(reader.readLine().trim());
+        width = Integer.parseInt(reader.readLine().trim());
+        height = Integer.parseInt(reader.readLine().trim());
+        tilesx = Integer.parseInt(reader.readLine().trim());
+        tilesy = Integer.parseInt(reader.readLine().trim());
+        reader.readLine().trim();
+        reader.readLine().trim();
+        tilesx = Math.max(1, tilesx);
+        tilesy = Math.max(1, tilesy);
+    }
+}

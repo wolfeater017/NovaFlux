@@ -1,0 +1,15 @@
+package mapcreator;
+
+
+import runtime.Driver;
+import runtime.GamePanel;
+
+public class CreatorPanel extends GamePanel{
+
+	public CreatorPanel(Driver game) {
+		super(game);
+		
+		
+		
+	}
+}

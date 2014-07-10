@@ -1,0 +1,22 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            ControlledInputReciever
+
+public interface MouseListener
+    extends ControlledInputReciever
+{
+
+    public abstract void mouseWheelMoved(int i);
+
+    public abstract void mouseClicked(int i, int j, int k, int l);
+
+    public abstract void mousePressed(int i, int j, int k);
+
+    public abstract void mouseReleased(int i, int j, int k);
+
+    public abstract void mouseMoved(int i, int j, int k, int l);
+
+    public abstract void mouseDragged(int i, int j, int k, int l);
+}

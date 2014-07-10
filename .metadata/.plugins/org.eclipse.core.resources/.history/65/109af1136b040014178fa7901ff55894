@@ -1,0 +1,44 @@
+package tools;
+
+import java.io.File;
+import java.util.Random;
+
+import ai.IceCube;
+import characters.Blob;
+import Graphic.TextMap;
+import Ref.ID;
+
+public class TextMapLoader extends TextMap{
+
+	public TextMapLoader(File TextFile) {
+		super(TextFile);
+		
+	}
+
+	@Override
+	protected Thing IDAssignor(String ID, int x, int y, boolean visibility,Object[] objs) {
+		
+		switch(ID){
+		case ID.BLOCK:
+			list.add(index, new Block(x, y, visible, index, null) );
+			break;
+		case BLOB:
+			list.add(index,new Blob(x, y, null) );
+			break;
+		case ICE_CUBE:
+			Random generate = new Random();
+			list.add(index,new IceCube(x, y, generate.nextInt(2), generate.nextInt(2) +2));
+			break;
+		default:
+			System.out.println("Missing ID: " + id.toString() );
+			System.out.println("Under: game.tools.ObjectController");
+			break;
+		
+		}
+		
+		
+		
+		return null;
+	}
+
+}

@@ -1,0 +1,58 @@
+package mapcreator;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+import tools.Path;
+
+public class PathForm extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4013469739190992663L;
+	
+	Path path;
+	
+	Panel panel;
+	
+	public PathForm(){
+		
+		setResizable(false);
+		setSize(500, 500);
+		setTitle("Enter Path");
+		add( panel = new Panel() );
+		panel.setVisible(true);
+		setVisible(true);
+	}
+	
+	
+	
+	private class Panel extends JPanel{
+		
+		JLabel xTextLabel,yTextLabel;
+		JTextArea x,y;
+		JButton Submit,cancel;
+		
+		public Panel(){
+			
+			add(xTextLabel = new JLabel("Enter X coordinates for path") );
+			add( x = new JTextArea("x1,x2,x3,...") );
+			add(yTextLabel = new JLabel("Enter y coordinates for path") );
+			add( y = new JTextArea("y1,y2,y3,..") );
+			
+			add( Submit = new JButton("Submit") );
+			add( cancel = new JButton("Cancel") );
+			
+			
+		}
+		
+		
+		
+	}
+	
+
+}

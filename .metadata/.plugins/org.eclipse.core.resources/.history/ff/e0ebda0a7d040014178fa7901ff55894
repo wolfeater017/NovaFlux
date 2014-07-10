@@ -1,0 +1,108 @@
+package mapcreator;
+
+import javax.swing.JPanel;
+
+
+public class Panel extends JPanel implements Runnable{
+	
+	
+	
+	protected CreatorApp cp;
+	
+	private Thread thread;
+	private boolean running = false;
+	protected int SPS,FPS; //SPS - Steps in the last Second - Steps per second
+	 //FPS - number of renders in the last second - frames per second
+	
+	public Panel(CreatorApp cp){
+		this.cp = cp;
+	}
+	
+	
+	
+	public void Step(){
+		
+	}
+	
+	
+	
+	
+	/**
+	 * NEVER ALTER THIS METHOD
+	 * NEVER CALL THIS METHOD IN A SUBCLASS
+	 */
+	@Override
+	public void run() {
+		
+		long lastTime = System.nanoTime();
+		final double numTicks = 60.0;
+		double n = 1000000000 / numTicks;
+		double delta = 0;
+		int frames = 0;
+		int ticks = 0;
+		long timer = System.currentTimeMillis();
+		
+		while(running){
+			long currentTime = System.nanoTime();
+			delta +=(currentTime - lastTime)/n;
+			lastTime = currentTime;
+			
+			if(delta >=1){
+				Step();
+				ticks++;
+				delta--;
+			}
+			
+			repaint();
+
+			frames++;
+			
+			if(System.currentTimeMillis() - timer > 1000){
+				timer+=1000;
+//				System.out.println(ticks + " Ticks, FPS: " + frames);
+			
+				//ticks are the number of Iterations in the last second
+				//FPS is the number of renders in the last second
+				this.SPS = ticks;
+				this.FPS = frames;
+				ticks = 0;
+				frames = 0;
+			}
+		}
+		
+		stop();
+		
+	}
+	
+	/**
+	 * Relates directly to Game Loop, NEVER ALTER
+	 */
+	private synchronized void start(){
+		if(running)
+			return;
+		else
+			running = true;
+		
+		thread = new Thread(this);
+		thread.start();
+	}
+	/**
+	 * Relates directly to Game Loop, NEVER ALTER
+	 */
+	private synchronized void stop(){
+		if(!running)
+			return;
+		else 
+			running = false;
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		System.exit(1);
+	}
+
+}

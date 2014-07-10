@@ -1,0 +1,43 @@
+package org.newdawn.slick;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+
+// Referenced classes of package org.newdawn.slick:
+//            SlickException, CanvasGameContainer, Input
+
+class this._cls0
+    implements Runnable
+{
+
+    final CanvasGameContainer this$0;
+
+    public void run()
+    {
+        try
+        {
+            Input.disableControllers();
+            try
+            {
+                Display.setParent(CanvasGameContainer.this);
+            }
+            catch(LWJGLException e)
+            {
+                throw new SlickException("Failed to setParent of canvas", e);
+            }
+            container.setup();
+            CanvasGameContainer.access$000(CanvasGameContainer.this);
+        }
+        catch(SlickException e)
+        {
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    ntainer()
+    {
+        this$0 = CanvasGameContainer.this;
+        super();
+    }
+}

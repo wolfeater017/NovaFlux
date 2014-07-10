@@ -1,0 +1,127 @@
+package mapcreator;
+
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
+
+
+public class CreatorApp extends JFrame  implements KeyListener,MouseMotionListener,MouseListener{
+
+	/**
+	 * @author Ben Bemis
+	 */
+	private static final long serialVersionUID = 3820251631633799971L;
+	public static int width = 900,height;
+	ArrayList<String> Types = new ArrayList<String>();
+	
+	Panel panel;
+	
+
+	public <E extends Enum<E>>CreatorApp(Class<E> ThingTypes ) {
+		super();
+		
+		addKeyListener(this);
+		addMouseMotionListener(this);
+		addMouseListener(this);
+		
+		setSize(width, width/4*3);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFocusable(true);
+		add( panel = new Panel(this) );
+		panel.setVisible(true);
+		setVisible(true);
+		
+		for(@SuppressWarnings("unused") Enum<E> enumVal: ThingTypes.getEnumConstants() )
+			Types.add( ThingTypes.toString() );
+		
+		System.out.println("Enumeration Loaded");
+		panel.start();
+	}
+	
+	
+	public void Step(){
+		
+	}
+	
+	
+
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+}

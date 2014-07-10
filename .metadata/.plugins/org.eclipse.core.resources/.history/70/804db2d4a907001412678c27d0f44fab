@@ -1,0 +1,85 @@
+package tools;
+
+import java.awt.image.BufferedImage;
+
+import Graphic.TextMap;
+import Ref.Ref;
+import audio.AudioPlayer;
+import runtime.Loader;
+import tools.ProgressBar;
+
+public class LM extends Loader{
+	
+	public static BufferedImage BBBTITLE,BLOB_A,BLOB_B,BLOB_C,BLOB_D,BLOB_E,
+	BLOB_A2,BLOB_B2,BLOB_C2,BLOB_D2,ICE_CUBE;
+	
+	public static MapProcessor RANDOM_MAP,MAZE_MAP;
+	public static TextMapLoader TEST_MAP;
+	public static String SOUND_SUCCESS,MUSIC_CASTLEMANIA;
+	
+	public LM(){ super(null); }
+	
+	public LM( ProgressBar pb){ super(pb);  }
+
+	@Override
+	protected void init() {
+		pb.Update(0.01);
+		
+		//load everything necessary for the loading screen but nothing more
+		
+		BBBTITLE = Loader.Image(Ref.IMAGE_LOCATION + "Title.png");
+		MUSIC_CASTLEMANIA = "MusicCastleMania";
+		AudioPlayer.addMusic(MUSIC_CASTLEMANIA,Ref.AUDIO_LOCATION + "background.ogg");
+	}
+	
+	private void firstThird(){
+		
+		BLOB_A = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/A.png");
+		BLOB_B = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/B.png");
+		BLOB_C = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/C.png");
+		BLOB_D = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/D.png");
+		BLOB_E = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/E.png");
+		BLOB_A2 = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/A2.png");
+		BLOB_B2 = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/B2.png");
+		BLOB_C2 = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/C2.png");
+		BLOB_D2 = Loader.Image(Ref.IMAGE_LOCATION +"OvalMan/D2.png");
+		ICE_CUBE = Loader.Image(Ref.IMAGE_LOCATION + "IceCube.png");
+		this.UpdateProgress(.33);
+	}
+	
+	private void secondThird(){
+		
+		RANDOM_MAP = new MapProcessor( Loader.Image(Ref.IMAGE_LOCATION + "RandomMap.png") );
+		MAZE_MAP = new MapProcessor( Loader.Image(Ref.IMAGE_LOCATION + "Maze.png") );
+		
+		TEST_MAP = new TextMapLoader(Loader.getFile(Ref.RES_LOCATION + "MapTest.txt") );
+		this.UpdateProgress(.66);
+	}
+	
+	private void thirdThird(){
+		SOUND_SUCCESS = "SoundSuccess";
+		AudioPlayer.addSound(SOUND_SUCCESS,Ref.AUDIO_LOCATION + "Success.ogg");
+		
+		this.UpdateProgress(1.0);
+	}
+
+	@Override
+	protected void LoadingSegments() throws Exception {
+		// Load additional information but update progress percentage in between
+
+		firstThird();
+		secondThird();
+		thirdThird();
+		
+	}
+	
+	@Override
+	protected void UpdateProgress(double Progress) {
+		super.UpdateProgress(Progress);
+		if(pb!=null)
+			pb.Update(Progress);
+	}
+	
+
+}
+

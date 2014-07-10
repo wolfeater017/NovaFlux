@@ -1,0 +1,24 @@
+package org.newdawn.slick;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+// Referenced classes of package org.newdawn.slick:
+//            AppGameContainer
+
+private class this._cls0 extends OutputStream
+{
+
+    final AppGameContainer this$0;
+
+    public void write(int i)
+        throws IOException
+    {
+    }
+
+    private ()
+    {
+        this$0 = AppGameContainer.this;
+        super();
+    }
+}

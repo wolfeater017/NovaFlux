@@ -1,0 +1,7 @@
+package mapcreator;
+
+import runtime.Driver;
+
+public class CreatorDriver extends Driver{
+
+}

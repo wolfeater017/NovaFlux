@@ -1,0 +1,95 @@
+package tools;
+
+import java.awt.Point;
+
+public class Path {
+	
+	private Point[] points;
+	private int Index,length;
+	private boolean Forward;
+	
+	public Path(int StartIndex,Point...points){
+		this.points = points;
+		this.length = this.points.length;
+		this.Index = StartIndex;
+		if(Index + 1 >= length)
+			Forward = false;
+		else
+			Forward = true;
+	}
+	
+	public void ForwardStep(){ 
+		if(Index + 1 >= length)
+			Forward = false;
+		this.Index++;
+	}
+	public void BackwardsStep(){ 
+		if( Index - 1 < 0)
+			Forward = true;
+		this.Index--;
+	}
+	
+	public Point getNextPoint(){
+		if(Index + 1 == length)
+			return null;
+		else
+			return points[Index + 1];
+	}
+	
+	public Point getLastPoint(){
+		if(Index - 1 == -1)
+			return null;
+		else
+			return points[Index - 1];
+	}
+	
+	public Point getPoint(){ System.out.println(Index); return points[Index];  }
+	public int getIndex(){return Index; }
+	
+	public double getDistToCurrent(Point position){
+		return Calc.getDistance(position, points[Index] );
+	}
+	public double getDistToNext(Point position){
+		return Calc.getDistance(position, points[Index+1] );
+	}
+	public double getDistToLast(Point position){
+		return Calc.getDistance(position, points[Index-1]);
+	}
+	
+	public boolean movingForward(){ return this.Forward; }
+	public int getNextDIRIndexX(){
+		
+			if(getNextPoint().x - getPoint().x < 0)
+				return AI.left;
+			else
+				return AI.right;
+		
+	}
+	
+	public int getNextDIRIndexY(){
+		
+		if(getNextPoint().y - getPoint().y > 0)
+			return AI.down;
+		else
+			return AI.up;
+		
+	}
+	public int getLastDIRIndexX(){
+		
+		if(getLastPoint().x - getPoint().x < 0)
+			return AI.left;
+		else
+			return AI.right;
+	
+	}
+
+	public int getLastDIRIndexY(){
+	
+	if(getLastPoint().y - getPoint().y > 0)
+		return AI.down;
+	else
+		return AI.up;
+	
+	}	
+
+}

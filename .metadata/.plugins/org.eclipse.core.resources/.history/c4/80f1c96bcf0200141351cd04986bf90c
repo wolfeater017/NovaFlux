@@ -1,0 +1,45 @@
+package org.newdawn.slick;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+// Referenced classes of package org.newdawn.slick:
+//            AngelCodeFont
+
+private static class 
+{
+
+    int id;
+    Short yOffset;
+    Short width;
+    Short height;
+    String text;
+
+    private ()
+    {
+    }
+
+
+    // Unreferenced inner class org/newdawn/slick/AngelCodeFont$1
+
+/* anonymous class */
+    class AngelCodeFont._cls1 extends LinkedHashMap
+    {
+
+        final AngelCodeFont this$0;
+
+        protected boolean removeEldestEntry(java.util.Map.Entry eldest)
+        {
+            AngelCodeFont.access$002(AngelCodeFont.this, (AngelCodeFont.DisplayList)eldest.getValue());
+            AngelCodeFont.access$102(AngelCodeFont.this, AngelCodeFont.access$000(AngelCodeFont.this).id);
+            return false;
+        }
+
+            
+            {
+                this$0 = AngelCodeFont.this;
+                super(x0, x1, x2);
+            }
+    }
+
+}

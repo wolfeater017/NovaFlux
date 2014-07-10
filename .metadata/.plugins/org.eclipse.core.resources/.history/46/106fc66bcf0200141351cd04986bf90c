@@ -1,0 +1,45 @@
+package org.newdawn.slick;
+
+import java.awt.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+// Referenced classes of package org.newdawn.slick:
+//            AppletGameContainer
+
+public class add extends Panel
+{
+
+    TextArea textArea;
+    final AppletGameContainer this$0;
+
+    public (Exception e)
+    {
+        this$0 = AppletGameContainer.this;
+        super();
+        textArea = new TextArea();
+        setLayout(new BorderLayout());
+        setBackground(Color.black);
+        setForeground(Color.white);
+        Font consoleFont = new Font("Arial", 1, 14);
+        Label slickLabel = new Label("SLICK CONSOLE", 1);
+        slickLabel.setFont(consoleFont);
+        add(slickLabel, "First");
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        textArea.setText(sw.toString());
+        textArea.setEditable(false);
+        add(textArea, "Center");
+        add(new Panel(), "Before");
+        add(new Panel(), "After");
+        Panel bottomPanel = new Panel();
+        bottomPanel.setLayout(new GridLayout(0, 1));
+        Label infoLabel1 = new Label("An error occured while running the applet.", 1);
+        Label infoLabel2 = new Label("Plese contact support to resolve this issue.", 1);
+        infoLabel1.setFont(consoleFont);
+        infoLabel2.setFont(consoleFont);
+        bottomPanel.add(infoLabel1);
+        bottomPanel.add(infoLabel2);
+        add(bottomPanel, "Last");
+    }
+}

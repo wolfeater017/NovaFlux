@@ -1,0 +1,34 @@
+package mapcreator;
+
+
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
+
+
+public class CreatorApp extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3820251631633799971L;
+	
+	ArrayList<String> Types = new ArrayList<String>();
+	
+
+	public <E extends Enum<E>>CreatorPanel(Driver game,Class<E> ThingTypes ) {
+		super(game);
+		
+		
+
+		
+		for(@SuppressWarnings("unused") Enum<E> enumVal: ThingTypes.getEnumConstants() )
+			Types.add( ThingTypes.toString() );
+		
+		System.out.println("Enumeration Loaded");
+	}
+	
+	
+	
+}

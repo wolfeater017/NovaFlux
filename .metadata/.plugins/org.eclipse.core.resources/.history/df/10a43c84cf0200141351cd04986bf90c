@@ -1,0 +1,33 @@
+package org.newdawn.slick;
+
+import java.security.PrivilegedAction;
+import org.newdawn.slick.util.Log;
+
+// Referenced classes of package org.newdawn.slick:
+//            AngelCodeFont, SlickException, Graphics
+
+class this._cls0
+    implements PrivilegedAction
+{
+
+    final Graphics this$0;
+
+    public Object run()
+    {
+        try
+        {
+            Graphics.DEFAULT_FONT = new AngelCodeFont("org/newdawn/slick/data/defaultfont.fnt", "org/newdawn/slick/data/defaultfont.png");
+        }
+        catch(SlickException e)
+        {
+            Log.error(e);
+        }
+        return null;
+    }
+
+    ion()
+    {
+        this$0 = Graphics.this;
+        super();
+    }
+}

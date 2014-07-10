@@ -1,0 +1,37 @@
+package mapcreator;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
+
+public class TempThing {
+	
+	String id;
+	int x,y;
+	boolean visibility;
+	ArrayList<SubThings> subs = new ArrayList<SubThings>();
+	
+	public TempThing(String id){
+		
+	}
+	
+	public void Step(){
+		
+	}
+	
+	public void render(Graphics g){
+		
+	}
+	
+	public String toString(){
+		String temp = id + " " + x + " " + y;
+		if(visibility)
+			temp += " true";
+		else
+			temp += " false";
+		for(int bbb = 0; bbb<subs.size(); bbb++)
+			temp+= " " + subs.get(bbb).toString();
+		
+		return temp;
+	}
+
+}

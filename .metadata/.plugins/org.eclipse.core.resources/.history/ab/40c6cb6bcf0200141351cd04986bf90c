@@ -1,0 +1,38 @@
+package org.newdawn.slick;
+
+import java.awt.Canvas;
+import org.lwjgl.opengl.Display;
+
+// Referenced classes of package org.newdawn.slick:
+//            AppletGameContainer
+
+class this._cls0 extends Thread
+{
+
+    final AppletGameContainer this$0;
+
+    public void run()
+    {
+        try
+        {
+            canvas.start();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            if(Display.isCreated())
+            {
+                Display.destroy();
+            }
+            displayParent.setVisible(false);
+            add(new nsolePanel(AppletGameContainer.this, e));
+            validate();
+        }
+    }
+
+    ntainerPanel()
+    {
+        this$0 = AppletGameContainer.this;
+        super();
+    }
+}

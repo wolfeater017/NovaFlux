@@ -1,0 +1,77 @@
+package org.newdawn.slick;
+
+import java.awt.Canvas;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.PixelFormat;
+import org.newdawn.slick.openal.SoundStore;
+import org.newdawn.slick.opengl.InternalTextureLoader;
+import org.newdawn.slick.util.Log;
+
+// Referenced classes of package org.newdawn.slick:
+//            GameContainer, AppletGameContainer
+
+public class container
+{
+
+    private pplet container;
+    final AppletGameContainer this$0;
+
+    private void createDisplay()
+        throws Exception
+    {
+        try
+        {
+            Display.create(new PixelFormat(8, 8, GameContainer.stencil ? 8 : 0));
+            alphaSupport = true;
+        }
+        catch(Exception e)
+        {
+            alphaSupport = false;
+            Display.destroy();
+            Display.create();
+        }
+    }
+
+    public void start()
+        throws Exception
+    {
+        Display.setParent(displayParent);
+        Display.setVSyncEnabled(true);
+        try
+        {
+            createDisplay();
+        }
+        catch(LWJGLException e)
+        {
+            e.printStackTrace();
+            Thread.sleep(1000L);
+            createDisplay();
+        }
+        initGL();
+        displayParent.requestFocus();
+        container.op();
+    }
+
+    protected void initGL()
+    {
+        try
+        {
+            InternalTextureLoader.get().clear();
+            SoundStore.get().clear();
+            container.pplet();
+        }
+        catch(Exception e)
+        {
+            Log.error(e);
+            container.pplet();
+        }
+    }
+
+    public ( container)
+    {
+        this$0 = AppletGameContainer.this;
+        super();
+        this.container = container;
+    }
+}

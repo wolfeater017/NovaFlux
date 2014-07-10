@@ -1,0 +1,37 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            Animation, SpriteSheet, Image
+
+private class y
+{
+
+    public Image image;
+    public int duration;
+    public int x;
+    public int y;
+    final Animation this$0;
+
+    public (Image image, int duration)
+    {
+        this$0 = Animation.this;
+        super();
+        x = -1;
+        y = -1;
+        this.image = image;
+        this.duration = duration;
+    }
+
+    public duration(int duration, int x, int y)
+    {
+        this$0 = Animation.this;
+        super();
+        this.x = -1;
+        this.y = -1;
+        image = Animation.access$000(Animation.this).getSubImage(x, y);
+        this.duration = duration;
+        this.x = x;
+        this.y = y;
+    }
+}

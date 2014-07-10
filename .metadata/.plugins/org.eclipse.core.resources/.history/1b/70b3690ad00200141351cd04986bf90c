@@ -1,0 +1,43 @@
+package org.newdawn.slick.command;
+
+
+// Referenced classes of package org.newdawn.slick.command:
+//            InputProvider
+
+private class <init>
+{
+
+    private boolean down;
+    private boolean pressed;
+    final InputProvider this$0;
+
+    public boolean isPressed()
+    {
+        if(pressed)
+        {
+            pressed = false;
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    public boolean isDown()
+    {
+        return down;
+    }
+
+
+
+    private ()
+    {
+        this$0 = InputProvider.this;
+        super();
+    }
+
+    this._cls0(this._cls0 x1)
+    {
+        this();
+    }
+}

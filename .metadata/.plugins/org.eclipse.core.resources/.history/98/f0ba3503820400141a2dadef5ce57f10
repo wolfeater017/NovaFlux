@@ -1,0 +1,19 @@
+package mapcreator;
+
+import java.awt.Graphics;
+
+public class TempThing {
+	
+	public TempThing(String id){
+		
+	}
+	
+	public void Step(){
+		
+	}
+	
+	public void render(Graphics g){
+		
+	}
+
+}

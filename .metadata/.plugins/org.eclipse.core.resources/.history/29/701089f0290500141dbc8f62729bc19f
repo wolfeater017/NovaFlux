@@ -1,0 +1,36 @@
+package mapcreator;
+
+import java.awt.FileDialog;
+import java.io.File;
+import java.io.FilenameFilter;
+
+import runtime.Loader;
+
+public class FileManager {
+	
+	private CreatorApp ca;
+	
+	public FileManager(CreatorApp ca){
+		this.ca = ca;
+	}
+	
+	public void LoadFile(){
+		
+	}
+	
+	public void SaveFile(){
+		
+		FileDialog fd = new FileDialog(ca, "Save Map", FileDialog.SAVE);
+		fd.setFilenameFilter(new FilenameFilter(){
+			@Override
+			public boolean accept(File dir, String name) {
+				// TODO Auto-generated method stub
+				return name.endsWith(".txt");
+			}
+		});
+		fd.setFile("UntitledMap.txt");
+		fd.setVisible(true);
+		System.out.println("File: "+ fd.getFile() );
+	}
+
+}

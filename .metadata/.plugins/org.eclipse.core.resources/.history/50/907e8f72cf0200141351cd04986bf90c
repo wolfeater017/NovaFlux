@@ -1,0 +1,59 @@
+package org.newdawn.slick;
+
+import java.nio.ByteBuffer;
+import org.newdawn.slick.opengl.ImageData;
+import org.newdawn.slick.opengl.LoadableImageData;
+
+// Referenced classes of package org.newdawn.slick:
+//            BigImage
+
+class val.dataWidth
+    implements ImageData
+{
+
+    final LoadableImageData val$data;
+    final int val$dataHeight;
+    final ByteBuffer val$imageBuffer;
+    final int val$dataWidth;
+    final BigImage this$0;
+
+    public int getDepth()
+    {
+        return val$data.getDepth();
+    }
+
+    public int getHeight()
+    {
+        return val$dataHeight;
+    }
+
+    public ByteBuffer getImageBufferData()
+    {
+        return val$imageBuffer;
+    }
+
+    public int getTexHeight()
+    {
+        return val$dataHeight;
+    }
+
+    public int getTexWidth()
+    {
+        return val$dataWidth;
+    }
+
+    public int getWidth()
+    {
+        return val$dataWidth;
+    }
+
+    ableImageData()
+    {
+        this$0 = final_bigimage;
+        val$data = loadableimagedata;
+        val$dataHeight = i;
+        val$imageBuffer = bytebuffer;
+        val$dataWidth = I.this;
+        super();
+    }
+}

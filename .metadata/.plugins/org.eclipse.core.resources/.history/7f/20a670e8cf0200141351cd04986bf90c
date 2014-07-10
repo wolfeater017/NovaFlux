@@ -1,0 +1,17 @@
+package org.newdawn.slick;
+
+
+// Referenced classes of package org.newdawn.slick:
+//            Input
+
+public interface ControlledInputReciever
+{
+
+    public abstract void setInput(Input input);
+
+    public abstract boolean isAcceptingInput();
+
+    public abstract void inputEnded();
+
+    public abstract void inputStarted();
+}

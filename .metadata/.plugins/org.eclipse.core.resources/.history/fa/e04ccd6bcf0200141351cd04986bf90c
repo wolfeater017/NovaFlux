@@ -1,0 +1,578 @@
+package org.newdawn.slick;
+
+import java.util.ArrayList;
+import org.lwjgl.Sys;
+import org.newdawn.slick.util.Log;
+
+// Referenced classes of package org.newdawn.slick:
+//            Renderable, SpriteSheet, Color, Image
+
+public class Animation
+    implements Renderable
+{
+    private class Frame
+    {
+
+        public Image image;
+        public int duration;
+        public int x;
+        public int y;
+        final Animation this$0;
+
+        public Frame(Image image, int duration)
+        {
+            this$0 = Animation.this;
+            super();
+            x = -1;
+            y = -1;
+            this.image = image;
+            this.duration = duration;
+        }
+
+        public Frame(int duration, int x, int y)
+        {
+            this$0 = Animation.this;
+            super();
+            this.x = -1;
+            this.y = -1;
+            image = spriteSheet.getSubImage(x, y);
+            this.duration = duration;
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+
+    private ArrayList frames;
+    private int currentFrame;
+    private long nextChange;
+    private boolean stopped;
+    private long timeLeft;
+    private float speed;
+    private int stopAt;
+    private long lastUpdate;
+    private boolean firstUpdate;
+    private boolean autoUpdate;
+    private int direction;
+    private boolean pingPong;
+    private boolean loop;
+    private SpriteSheet spriteSheet;
+
+    public Animation()
+    {
+        this(true);
+    }
+
+    public Animation(Image frames[], int duration)
+    {
+        this(frames, duration, true);
+    }
+
+    public Animation(Image frames[], int durations[])
+    {
+        this(frames, durations, true);
+    }
+
+    public Animation(boolean autoUpdate)
+    {
+        frames = new ArrayList();
+        currentFrame = -1;
+        nextChange = 0L;
+        stopped = false;
+        speed = 1.0F;
+        stopAt = -2;
+        firstUpdate = true;
+        this.autoUpdate = true;
+        direction = 1;
+        loop = true;
+        spriteSheet = null;
+        currentFrame = 0;
+        this.autoUpdate = autoUpdate;
+    }
+
+    public Animation(Image frames[], int duration, boolean autoUpdate)
+    {
+        this.frames = new ArrayList();
+        currentFrame = -1;
+        nextChange = 0L;
+        stopped = false;
+        speed = 1.0F;
+        stopAt = -2;
+        firstUpdate = true;
+        this.autoUpdate = true;
+        direction = 1;
+        loop = true;
+        spriteSheet = null;
+        for(int i = 0; i < frames.length; i++)
+        {
+            addFrame(frames[i], duration);
+        }
+
+        currentFrame = 0;
+        this.autoUpdate = autoUpdate;
+    }
+
+    public Animation(Image frames[], int durations[], boolean autoUpdate)
+    {
+        this.frames = new ArrayList();
+        currentFrame = -1;
+        nextChange = 0L;
+        stopped = false;
+        speed = 1.0F;
+        stopAt = -2;
+        firstUpdate = true;
+        this.autoUpdate = true;
+        direction = 1;
+        loop = true;
+        spriteSheet = null;
+        this.autoUpdate = autoUpdate;
+        if(frames.length != durations.length)
+        {
+            throw new RuntimeException("There must be one duration per frame");
+        }
+        for(int i = 0; i < frames.length; i++)
+        {
+            addFrame(frames[i], durations[i]);
+        }
+
+        currentFrame = 0;
+    }
+
+    public Animation(SpriteSheet frames, int duration)
+    {
+        this(frames, 0, 0, frames.getHorizontalCount() - 1, frames.getVerticalCount() - 1, true, duration, true);
+    }
+
+    public Animation(SpriteSheet frames, int x1, int y1, int x2, int y2, boolean horizontalScan, int duration, 
+            boolean autoUpdate)
+    {
+        this.frames = new ArrayList();
+        currentFrame = -1;
+        nextChange = 0L;
+        stopped = false;
+        speed = 1.0F;
+        stopAt = -2;
+        firstUpdate = true;
+        this.autoUpdate = true;
+        direction = 1;
+        loop = true;
+        spriteSheet = null;
+        this.autoUpdate = autoUpdate;
+        if(!horizontalScan)
+        {
+            for(int x = x1; x <= x2; x++)
+            {
+                for(int y = y1; y <= y2; y++)
+                {
+                    addFrame(frames.getSprite(x, y), duration);
+                }
+
+            }
+
+        } else
+        {
+            for(int y = y1; y <= y2; y++)
+            {
+                for(int x = x1; x <= x2; x++)
+                {
+                    addFrame(frames.getSprite(x, y), duration);
+                }
+
+            }
+
+        }
+    }
+
+    public Animation(SpriteSheet ss, int frames[], int duration[])
+    {
+        this.frames = new ArrayList();
+        currentFrame = -1;
+        nextChange = 0L;
+        stopped = false;
+        speed = 1.0F;
+        stopAt = -2;
+        firstUpdate = true;
+        autoUpdate = true;
+        direction = 1;
+        loop = true;
+        spriteSheet = null;
+        spriteSheet = ss;
+        int x = -1;
+        int y = -1;
+        for(int i = 0; i < frames.length / 2; i++)
+        {
+            x = frames[i * 2];
+            y = frames[i * 2 + 1];
+            addFrame(duration[i], x, y);
+        }
+
+    }
+
+    public void addFrame(int duration, int x, int y)
+    {
+        if(duration == 0)
+        {
+            Log.error((new StringBuilder()).append("Invalid duration: ").append(duration).toString());
+            throw new RuntimeException((new StringBuilder()).append("Invalid duration: ").append(duration).toString());
+        }
+        if(frames.isEmpty())
+        {
+            nextChange = (int)((float)duration / speed);
+        }
+        frames.add(new Frame(duration, x, y));
+        currentFrame = 0;
+    }
+
+    public void setAutoUpdate(boolean auto)
+    {
+        autoUpdate = auto;
+    }
+
+    public void setPingPong(boolean pingPong)
+    {
+        this.pingPong = pingPong;
+    }
+
+    public boolean isStopped()
+    {
+        return stopped;
+    }
+
+    public void setSpeed(float spd)
+    {
+        if(spd > 0.0F)
+        {
+            nextChange = (long)(((float)nextChange * speed) / spd);
+            speed = spd;
+        }
+    }
+
+    public float getSpeed()
+    {
+        return speed;
+    }
+
+    public void stop()
+    {
+        if(frames.size() == 0)
+        {
+            return;
+        } else
+        {
+            timeLeft = nextChange;
+            stopped = true;
+            return;
+        }
+    }
+
+    public void start()
+    {
+        if(!stopped)
+        {
+            return;
+        }
+        if(frames.size() == 0)
+        {
+            return;
+        } else
+        {
+            stopped = false;
+            nextChange = timeLeft;
+            return;
+        }
+    }
+
+    public void restart()
+    {
+        if(frames.size() == 0)
+        {
+            return;
+        } else
+        {
+            stopped = false;
+            currentFrame = 0;
+            nextChange = (int)((float)((Frame)frames.get(0)).duration / speed);
+            firstUpdate = true;
+            lastUpdate = 0L;
+            return;
+        }
+    }
+
+    public void addFrame(Image frame, int duration)
+    {
+        if(duration == 0)
+        {
+            Log.error((new StringBuilder()).append("Invalid duration: ").append(duration).toString());
+            throw new RuntimeException((new StringBuilder()).append("Invalid duration: ").append(duration).toString());
+        }
+        if(frames.isEmpty())
+        {
+            nextChange = (int)((float)duration / speed);
+        }
+        frames.add(new Frame(frame, duration));
+        currentFrame = 0;
+    }
+
+    public void draw()
+    {
+        draw(0.0F, 0.0F);
+    }
+
+    public void draw(float x, float y)
+    {
+        draw(x, y, getWidth(), getHeight());
+    }
+
+    public void draw(float x, float y, Color filter)
+    {
+        draw(x, y, getWidth(), getHeight(), filter);
+    }
+
+    public void draw(float x, float y, float width, float height)
+    {
+        draw(x, y, width, height, Color.white);
+    }
+
+    public void draw(float x, float y, float width, float height, Color col)
+    {
+        if(frames.size() == 0)
+        {
+            return;
+        }
+        if(autoUpdate)
+        {
+            long now = getTime();
+            long delta = now - lastUpdate;
+            if(firstUpdate)
+            {
+                delta = 0L;
+                firstUpdate = false;
+            }
+            lastUpdate = now;
+            nextFrame(delta);
+        }
+        Frame frame = (Frame)frames.get(currentFrame);
+        frame.image.draw(x, y, width, height, col);
+    }
+
+    public void renderInUse(int x, int y)
+    {
+        if(frames.size() == 0)
+        {
+            return;
+        }
+        if(autoUpdate)
+        {
+            long now = getTime();
+            long delta = now - lastUpdate;
+            if(firstUpdate)
+            {
+                delta = 0L;
+                firstUpdate = false;
+            }
+            lastUpdate = now;
+            nextFrame(delta);
+        }
+        Frame frame = (Frame)frames.get(currentFrame);
+        spriteSheet.renderInUse(x, y, frame.x, frame.y);
+    }
+
+    public int getWidth()
+    {
+        return ((Frame)frames.get(currentFrame)).image.getWidth();
+    }
+
+    public int getHeight()
+    {
+        return ((Frame)frames.get(currentFrame)).image.getHeight();
+    }
+
+    public void drawFlash(float x, float y, float width, float height)
+    {
+        drawFlash(x, y, width, height, Color.white);
+    }
+
+    public void drawFlash(float x, float y, float width, float height, Color col)
+    {
+        if(frames.size() == 0)
+        {
+            return;
+        }
+        if(autoUpdate)
+        {
+            long now = getTime();
+            long delta = now - lastUpdate;
+            if(firstUpdate)
+            {
+                delta = 0L;
+                firstUpdate = false;
+            }
+            lastUpdate = now;
+            nextFrame(delta);
+        }
+        Frame frame = (Frame)frames.get(currentFrame);
+        frame.image.drawFlash(x, y, width, height, col);
+    }
+
+    /**
+     * @deprecated Method updateNoDraw is deprecated
+     */
+
+    public void updateNoDraw()
+    {
+        if(autoUpdate)
+        {
+            long now = getTime();
+            long delta = now - lastUpdate;
+            if(firstUpdate)
+            {
+                delta = 0L;
+                firstUpdate = false;
+            }
+            lastUpdate = now;
+            nextFrame(delta);
+        }
+    }
+
+    public void update(long delta)
+    {
+        nextFrame(delta);
+    }
+
+    public int getFrame()
+    {
+        return currentFrame;
+    }
+
+    public void setCurrentFrame(int index)
+    {
+        currentFrame = index;
+    }
+
+    public Image getImage(int index)
+    {
+        Frame frame = (Frame)frames.get(index);
+        return frame.image;
+    }
+
+    public int getFrameCount()
+    {
+        return frames.size();
+    }
+
+    public Image getCurrentFrame()
+    {
+        Frame frame = (Frame)frames.get(currentFrame);
+        return frame.image;
+    }
+
+    private void nextFrame(long delta)
+    {
+        if(stopped)
+        {
+            return;
+        }
+        if(frames.size() == 0)
+        {
+            return;
+        }
+        int realDuration;
+        for(nextChange -= delta; nextChange < 0L && !stopped; nextChange = nextChange + (long)realDuration)
+        {
+            if(currentFrame == stopAt)
+            {
+                stopped = true;
+                break;
+            }
+            if(currentFrame == frames.size() - 1 && !loop && !pingPong)
+            {
+                stopped = true;
+                break;
+            }
+            currentFrame = (currentFrame + direction) % frames.size();
+            if(pingPong)
+            {
+                if(currentFrame <= 0)
+                {
+                    currentFrame = 0;
+                    direction = 1;
+                    if(!loop)
+                    {
+                        stopped = true;
+                        break;
+                    }
+                } else
+                if(currentFrame >= frames.size() - 1)
+                {
+                    currentFrame = frames.size() - 1;
+                    direction = -1;
+                }
+            }
+            realDuration = (int)((float)((Frame)frames.get(currentFrame)).duration / speed);
+        }
+
+    }
+
+    public void setLooping(boolean loop)
+    {
+        this.loop = loop;
+    }
+
+    private long getTime()
+    {
+        return (Sys.getTime() * 1000L) / Sys.getTimerResolution();
+    }
+
+    public void stopAt(int frameIndex)
+    {
+        stopAt = frameIndex;
+    }
+
+    public int getDuration(int index)
+    {
+        return ((Frame)frames.get(index)).duration;
+    }
+
+    public void setDuration(int index, int duration)
+    {
+        ((Frame)frames.get(index)).duration = duration;
+    }
+
+    public int[] getDurations()
+    {
+        int durations[] = new int[frames.size()];
+        for(int i = 0; i < frames.size(); i++)
+        {
+            durations[i] = getDuration(i);
+        }
+
+        return durations;
+    }
+
+    public String toString()
+    {
+        String res = (new StringBuilder()).append("[Animation (").append(frames.size()).append(") ").toString();
+        for(int i = 0; i < frames.size(); i++)
+        {
+            Frame frame = (Frame)frames.get(i);
+            res = (new StringBuilder()).append(res).append(frame.duration).append(",").toString();
+        }
+
+        res = (new StringBuilder()).append(res).append("]").toString();
+        return res;
+    }
+
+    public Animation copy()
+    {
+        Animation copy = new Animation();
+        copy.spriteSheet = spriteSheet;
+        copy.frames = frames;
+        copy.autoUpdate = autoUpdate;
+        copy.direction = direction;
+        copy.loop = loop;
+        copy.pingPong = pingPong;
+        copy.speed = speed;
+        return copy;
+    }
+
+}

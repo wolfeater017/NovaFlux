@@ -1,0 +1,29 @@
+package org.newdawn.slick;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+// Referenced classes of package org.newdawn.slick:
+//            UnicodeFont
+
+class this._cls0 extends LinkedHashMap
+{
+
+    final UnicodeFont this$0;
+
+    protected boolean removeEldestEntry(java.util.eFont._cls2 eldest)
+    {
+        splayList displayList = (splayList)eldest.alue();
+        if(displayList != null)
+        {
+            UnicodeFont.access$002(UnicodeFont.this, displayList.id);
+        }
+        return size() > 200;
+    }
+
+    splayList(int x0, float x1, boolean x2)
+    {
+        this$0 = UnicodeFont.this;
+        super(x0, x1, x2);
+    }
+}

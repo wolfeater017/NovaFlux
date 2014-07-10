@@ -1,0 +1,15 @@
+package org.newdawn.slick;
+
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
+
+// Referenced classes of package org.newdawn.slick:
+//            Color
+
+public interface ShapeFill
+{
+
+    public abstract Color colorAt(Shape shape, float f, float f1);
+
+    public abstract Vector2f getOffsetAt(Shape shape, float f, float f1);
+}
