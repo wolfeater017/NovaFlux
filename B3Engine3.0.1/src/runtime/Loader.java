@@ -102,6 +102,10 @@ public abstract class Loader extends SwingWorker<Object, Object>{
 		return u;
 	}
 	
+	public static InputStream getInputStream(String path){
+		return Loader.class.getResourceAsStream(path);
+	}
+	
 	public static Scanner getFileScanner(String path){
 		return new Scanner(Loader.class.getResourceAsStream(path) );
 		

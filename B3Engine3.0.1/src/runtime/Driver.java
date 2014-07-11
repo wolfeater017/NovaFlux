@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import audio.AudioPlayer;
+
+import audio.OggManager;
 
 public class Driver extends JFrame implements KeyListener,MouseMotionListener,MouseListener{
 	
@@ -88,7 +89,8 @@ public class Driver extends JFrame implements KeyListener,MouseMotionListener,Mo
 	public void destroy(){
 		if(Loader.getProgressBar().getProgress()<1)
 			Loader.End();
-		AudioPlayer.destroy();
+		OggManager.destroy();
+		System.out.println("ALL AUDIO RESOURCES DISPOSED OF");
 		System.exit(1);
 	}
 	
